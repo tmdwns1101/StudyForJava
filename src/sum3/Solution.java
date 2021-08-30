@@ -1,8 +1,6 @@
 package sum3;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
@@ -10,6 +8,7 @@ public class Solution {
         List<List<Integer>> answer = new ArrayList<>();
 
         Arrays.sort(nums);
+
 
         for(int i=0; i<nums.length; i++) {
 
