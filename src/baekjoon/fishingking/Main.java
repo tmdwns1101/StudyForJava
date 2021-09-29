@@ -52,17 +52,6 @@ public class Main {
 
         while (person < c) {
 
-            //낚시왕이 있는 위치에서 상어 잡기
-//            for (int i = 0; i < r; i++) {
-//                Shark shark = sea[i][person];
-//                if (shark != null) {
-//                    answer += shark.size;
-//                    sea[i][person] = null;
-//                    sharks.remove(shark);
-//                    break;
-//                }
-//            }
-
             int minRow = r;
             int removeIdx = -1;
             for (Shark shark : sharks) {
