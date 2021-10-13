@@ -10,6 +10,7 @@ public class Main {
     static List<List<Integer>> connections = new ArrayList<>();
     static int[] population = new int[10];
     static int answer = Integer.MAX_VALUE;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -89,6 +90,7 @@ public class Main {
             int front = queue.poll();
             List<Integer> connection = connections.get(front);
             for(int zone: connection) {
+                //확인 하지 않고,가려는 구역이 해당 선거구여야 함.
                 if(!check[zone] && precinct.contains(zone)) {
                     queue.offer(zone);
                     count++;
