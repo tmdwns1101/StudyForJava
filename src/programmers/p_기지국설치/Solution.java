@@ -8,7 +8,6 @@ public class Solution {
         //전파가 닿을 수 있는 최대 범위
         int area = 2 * w + 1;
 
-
         if (length == 0) {
             answer += n / area;
             if (n % area > 0) answer += 1;
