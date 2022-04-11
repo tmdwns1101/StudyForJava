@@ -5,51 +5,28 @@ public class Solution {
         int answer = 0;
 
         int len = name.length();
-        boolean[] checked = new boolean[name.length()];
-        int n = 0;
+        int move = Integer.MAX_VALUE;
         for(int i=0; i<len; i++) {
-            if(name.charAt(i) == 'A') {
-                checked[i] = true;
-            } else {
-                n++;
-            }
-        }
-        int cursor = 0;
+            char alpha = name.charAt(i);
+            int up = alpha - 'A';
+            int down = 'Z' - alpha + 1;
 
-        while(n > 0) {
-            if(!checked[cursor]) {
-                n--;
-                checked[cursor] = true;
-            }
-            char alphabet = name.charAt(cursor);
-            //1. 해당 위치 문자로 변환하는데 필요한 연산
-            int right = alphabet - 'A';
-            int left = 26 - (alphabet-'A');
-            answer += Math.min(left, right);
+            answer += Math.min(up, down);
 
-            if(n > 0) {
-                //2. 다음 문자로 이동하는 최소 거리
-                int leftTo = cursor;
-                int lCnt = 0;
-                int rightTo = cursor;
-                int rCnt = 0;
-                for (int i = 0; i < len-1; i++) {
-                    leftTo = (leftTo - 1 + len) % len;
-                    lCnt++;
-                    if (!checked[leftTo]) break;
-                }
-                for (int i = 0; i < len-1; i++) {
-                    rightTo = (rightTo + 1) % len;
-                    rCnt++;
-                    if (!checked[rightTo]) break;
-                }
-                int min = Math.min(lCnt, rCnt);
-                answer += min;
-                cursor = min == lCnt ? leftTo : rightTo;
+            int next = i + 1;
+
+            while(next < len && name.charAt(next) == 'A') {
+                next++;
             }
+
+            int forwardAndReverse = (i*2) + (len-next);  //정방향으로 i 번째 알파벳으로 오다가, 'A'가 아닌 다음 알파벳으로 역방향으로 이동
+            move = Math.min(move, forwardAndReverse);
+            int reverseAndForward = (len-next) * 2 + i;  //역방향으로 'A'가 아닌 다음 알파벳으로 이동했다가, 정방향으로 i번째 알파벳으로 이동.
+            move = Math.min(move, reverseAndForward);
+
         }
 
 
-        return answer;
+        return answer + move;
     }
 }
